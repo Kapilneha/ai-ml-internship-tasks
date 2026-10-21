@@ -1,24 +1,22 @@
-# AI/ML Engineering Internship
+# AI/ML Engineering Internship Tasks
 
-## Overview
+This repository contains my work for the AI/ML Engineering internship training roadmap, covering environment setup, LLM API integration, JSON response parsing, text embeddings, and vector similarity.
 
-This repository contains my work for Tasks 1 and 2 of the AI/ML Engineering internship training roadmap. The tasks focus on setting up the development environment, understanding Git and GitHub workflows, integrating an LLM API, and parsing structured JSON responses.
-
-## Task 1: Development Environment and API Setup
+## Task 1: Environment Setup and API Connectivity
 
 ### Objectives
 - Configure Git and SSH authentication.
-- Clone and configure the training repository.
-- Set up a Python virtual environment.
-- Make a working API test call.
+- Set up the Python development environment.
+- Create and activate a virtual environment.
+- Test connectivity to an LLM API.
 
 ### Work Completed
-- Configured Git and SSH authentication for GitHub.
-- Set up the project locally using Python and VS Code.
+- Configured Git and GitHub SSH authentication.
+- Set up the project using Python and VS Code.
 - Created and activated a Python virtual environment.
-- Installed the required Python packages.
+- Installed the required dependencies.
 - Created scripts to explore API connectivity and JSON responses.
-- Tested LLM API integration using Groq.
+- Successfully tested text classification using the Groq API.
 
 ### Files
 - `claude_api_check.py`
@@ -26,48 +24,36 @@ This repository contains my work for Tasks 1 and 2 of the AI/ML Engineering inte
 - `requirements.txt`
 - `.gitignore`
 
-### Learning Outcomes
-- Git and SSH configuration.
-- Python virtual environments and package management.
-- API keys and environment variables.
-- Sending API requests and processing responses.
+**Implementation note:** The original training roadmap specifies the Claude API. Since the Anthropic API account had insufficient credits, Groq was used for the working LLM integration.
 
-**Implementation note:** The original training task mentions the Claude API. Due to the Anthropic API credit limitation, Groq was used for the working LLM API implementation.
-
-## Task 2: Git Branch/PR Workflow and JSON Response Parsing
+## Task 2: LLM API Integration and JSON Response Parsing
 
 ### Objectives
 - Learn the Git branch and pull request workflow.
-- Create a script that calls an LLM API.
+- Write a script that calls an LLM API.
 - Parse and validate the JSON response.
 
 ### Work Completed
 
-#### 1. Git and GitHub Workflow
-- Worked with the task branch `task-1-2-claude-api`.
-- Staged and committed project changes.
-- Synced local changes with the remote repository.
-- Prepared a pull request targeting the `main` branch.
-
-#### 2. LLM API Integration
-- Integrated the Groq API using the OpenAI-compatible Python SDK.
+**LLM API integration**
+- Integrated Groq using the OpenAI-compatible Python SDK.
 - Sent user messages to the model for text classification.
-- Requested structured JSON output.
+- Requested structured JSON responses.
 
-#### 3. JSON Parsing and Validation
-- Parsed model responses into Python dictionaries.
-- Checked required fields: `category`, `confidence`, and `explanation`.
-- Validated the supported category values.
-- Checked confidence values and data types.
+**Response parsing and validation**
+- Parsed the model's response into a Python dictionary.
+- Validated required fields: `category`, `confidence`, and `explanation`.
+- Checked that the category belongs to the supported categories.
+- Validated data types and confidence values between `0` and `1`.
 - Rejected invalid JSON, missing fields, and unexpected fields.
 
-#### 4. Command-Line Interface
-- Created a command-line entry point to classify user-provided text.
-- Displayed the classification result as formatted JSON.
+**Command-line interface**
+- Created an entry point to classify text supplied through command-line arguments.
+- Printed formatted JSON results.
 
-#### 5. Automated Testing
+**Automated testing**
 - Created unit tests using pytest.
-- Tested valid responses, invalid JSON, missing fields, unexpected fields, incorrect data types, confidence ranges, and classification behavior using a mocked client.
+- Tested valid responses, missing fields, invalid JSON, incorrect data types, unexpected fields, confidence range validation, and classification behavior with a mocked client.
 
 ### Files
 - `src/main.py`
@@ -77,43 +63,70 @@ This repository contains my work for Tasks 1 and 2 of the AI/ML Engineering inte
 - `test_parser.py`
 - `run_groq.py`
 
-### Example Usage
+### Example
+
+Command:
 
 ```powershell
 python -m src.main "I was charged twice for my subscription."
 ```
 
-### Example Output
+Example output:
 
 ```json
 {
   "category": "billing",
   "confidence": 0.95,
-  "explanation": "The user reports being charged twice for a subscription, indicating a billing issue."
+  "explanation": "The user reports being charged twice for a subscription."
 }
 ```
 
-The confidence score and explanation may vary between model responses.
+The exact confidence score and explanation may vary between model responses.
 
 ### Testing
-
-Run the automated tests:
 
 ```powershell
 python -m pytest -v
 ```
 
-**Result:** All 7 tests passed during local verification.
+**Last reported result:** All seven automated tests passed.
 
-## Technologies Used
+## Task 3: Text Embeddings and Vector Similarity
 
+### Objectives
+- Learn the fundamentals of text embeddings.
+- Generate embeddings for five text samples.
+- Calculate and compare vector similarity scores.
+
+### Work Completed
+- Loaded the `sentence-transformers/all-MiniLM-L6-v2` embedding model.
+- Generated embeddings for five sample sentences.
+- Obtained an embedding shape of `(5, 384)`, representing five sentences with 384 dimensions each.
+- Calculated cosine similarity between two related sentences.
+- Generated a complete similarity matrix for the five samples.
+- Identified the most similar pair of distinct sentences.
+- Printed similarity scores and interpreted their semantic relationship.
+
+### Example Result
+
+The similarity score between:
+
+- "I love learning artificial intelligence."
+- "I enjoy studying AI."
+
+was approximately `0.807` in the earlier run.
+
+A higher cosine similarity indicates that two embedding vectors point in more similar directions. It does not represent an exact percentage of shared meaning.
+
+### File
+- `embeddings_similarity.ipynb`
+
+### Technologies
 - Python
-- Groq API
-- OpenAI Python SDK
-- JSON
-- python-dotenv
-- pytest
-- Git and GitHub
+- Sentence Transformers
+- PyTorch
+- NumPy
+- pandas
 
 ## Project Structure
 
@@ -128,45 +141,44 @@ ai_ml_setup/
 ├── run_groq.py
 ├── claude_api_check.py
 ├── claude_json.py
+├── embeddings_similarity.ipynb
+├── semantic_search.py
 ├── requirements.txt
 ├── .gitignore
-├── .env
-├── embeddings_similarity.ipynb
-└── semantic_search.py
+└── README.md
 ```
-### Task 3: Text Embeddings and Vector Similarity
 
-**Objectives**
-- Understand text embeddings and vector representations.
-- Generate embeddings for five sample sentences.
-- Calculate cosine similarity between sentence embeddings.
-- Compare all sentences using a similarity matrix.
+The `.env` file is used for local API credentials and must not be committed to GitHub. The `semantic_search.py` file is reserved for subsequent work and is not claimed as completed in these tasks.
 
-**Work Completed**
-- Loaded the `sentence-transformers/all-MiniLM-L6-v2` model.
-- Generated five text embeddings, each containing 384 dimensions.
-- Calculated cosine similarity between individual sentences.
-- Created a complete similarity matrix using `util.cos_sim`.
-- Identified the most similar pair of distinct sentences.
-- Examined the relationship between similarity scores and semantic relatedness.
+## Technologies Used
 
-**Files**
-- `embeddings_similarity.ipynb`
-
-**Technologies**
 - Python
+- Groq API
+- OpenAI Python SDK
+- JSON
+- python-dotenv
+- pytest
 - Sentence Transformers
 - PyTorch
 - NumPy
 - pandas
+- Git and GitHub
 
-**Verification**
-- All eight notebook cells executed successfully.
-- The generated embedding shape was `(5, 384)`.
-- The similarity analysis ran successfully.
+## Current Progress
 
-The `.env` file contains local credentials and must not be committed to GitHub. The embeddings and semantic-search files are retained for subsequent internship tasks and are not claimed as completed work here.
+- [x] Task 1: Environment setup and API connectivity
+- [x] Task 2: LLM integration and JSON response parsing
+- [x] Task 3: Text embeddings and vector similarity
+- [ ] Task 4: Semantic search over sample documents
+- [ ] Task 5: Peer review and accuracy/cost notes
 
-## Current Scope
+## Security
 
-This README documents **Task 1 and Task 2 only**. Embeddings, vector similarity, and semantic search belong to later tasks and are outside the scope of this progress report.
+- Store API keys in `.env`.
+- Keep `.env` listed in `.gitignore`.
+- Never commit API keys or other credentials to version control.
+
+## Author
+
+Neha Kapil  
+GitHub: [Kapilneha](https://github.com/Kapilneha)
