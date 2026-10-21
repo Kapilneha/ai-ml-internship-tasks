@@ -134,6 +134,36 @@ ai_ml_setup/
 ├── embeddings_similarity.ipynb
 └── semantic_search.py
 ```
+### Task 3: Text Embeddings and Vector Similarity
+
+**Objectives**
+- Understand text embeddings and vector representations.
+- Generate embeddings for five sample sentences.
+- Calculate cosine similarity between sentence embeddings.
+- Compare all sentences using a similarity matrix.
+
+**Work Completed**
+- Loaded the `sentence-transformers/all-MiniLM-L6-v2` model.
+- Generated five text embeddings, each containing 384 dimensions.
+- Calculated cosine similarity between individual sentences.
+- Created a complete similarity matrix using `util.cos_sim`.
+- Identified the most similar pair of distinct sentences.
+- Examined the relationship between similarity scores and semantic relatedness.
+
+**Files**
+- `embeddings_similarity.ipynb`
+
+**Technologies**
+- Python
+- Sentence Transformers
+- PyTorch
+- NumPy
+- pandas
+
+**Verification**
+- All eight notebook cells executed successfully.
+- The generated embedding shape was `(5, 384)`.
+- The similarity analysis ran successfully.
 
 The `.env` file contains local credentials and must not be committed to GitHub. The embeddings and semantic-search files are retained for subsequent internship tasks and are not claimed as completed work here.
 
