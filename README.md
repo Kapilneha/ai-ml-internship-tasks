@@ -2,7 +2,7 @@
 
 This repository contains my AI/ML internship practice tasks, including Git/GitHub setup, Claude API integration, text embeddings, and semantic search.
 
-## Task 1: Environment Setup
+## DAY 1: Environment Setup
 
 - Configured Git and GitHub SSH authentication.
 - Created and activated a Python virtual environment.
@@ -16,7 +16,7 @@ ssh -T git@github.com
 
 Expected result: GitHub confirms successful authentication.
 
-## Task 2: Claude API and JSON Parsing
+## DAY 2: Claude API and JSON Parsing
 
 ### Files
 
