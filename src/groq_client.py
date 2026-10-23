@@ -33,13 +33,22 @@ def classify_text(text):
             {
                 "role": "system",
                 "content": (
-                    "Classify the user's message. Return a JSON object "
-                    "with category, confidence, and explanation. "
-                    "category must be one of: bug_report, feature_request, "
-                    "billing, account_access, general_question, other. "
-                    "confidence must be a number from 0 to 1. "
-                    "explanation must be a non-empty string."
-                )
+                        "Classify the user's message into exactly one category: "
+                        "bug_report, feature_request, billing, account_access, "
+                        "general_question, or other. "
+                        "Use bug_report for reports of errors or broken behavior. "
+                        "Use feature_request for requests to add or improve functionality. "
+                        "Use billing for payments, invoices, or charges. "
+                        "Use account_access for login or account recovery issues. "
+                        "Use general_question for other ordinary questions. "
+                        "Use other when no category fits. "
+                        "Return a JSON object with exactly three fields: "
+                        "category, confidence, and explanation. "
+                        "confidence must be a number between 0 and 1. "
+                        "explanation must briefly justify the selected category. "
+                        "Base the classification only on the user's message. "
+                        "Do not include Markdown fences or text outside the JSON object."
+                    )
             },
             {
                 "role": "user",
