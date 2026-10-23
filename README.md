@@ -124,60 +124,39 @@ A higher cosine similarity indicates that two embedding vectors point in more si
 ## Task 4: Semantic Search
 
 ### Objectives
-- Implement semantic search over a collection of text documents.
+- Retrieve relevant documents using semantic similarity rather than exact keyword matching.
 - Generate document and query embeddings.
-- Rank documents by cosine similarity.
-- Evaluate retrieval results using sample queries.
+- Rank documents using cosine similarity.
 
 ### Work Completed
-- Created a collection of 20 sample documents covering machine learning, programming, databases, networking, cybersecurity, and other technical topics.
-- Loaded the pretrained `sentence-transformers/all-MiniLM-L6-v2` model.
-- Generated 384-dimensional embeddings for all 20 documents.
-- Converted user queries into embeddings using the same model.
-- Calculated cosine similarity between a query and the document embeddings.
-- Ranked documents by similarity and returned the top three results.
-- Tested the search implementation with five sample queries.
+- Created a collection of 20 sample documents covering programming, AI, databases, networking, cybersecurity, and related topics.
+- Used `sentence-transformers/all-MiniLM-L6-v2` to generate 384-dimensional embeddings.
+- Precomputed document embeddings before processing queries.
+- Generated a new embedding for each search query.
+- Calculated cosine similarity between the query and document embeddings.
+- Returned the top 3 documents ranked by similarity.
+- Tested the implementation with five queries.
+- Added a ranking test and documented evaluation results and limitations.
 
-### Example Result
+### Example Results
+- Query: "How do computers learn from data?"
+  - Top result: Machine learning allows computers to learn patterns from data.
+  - Similarity score: `0.6891`
+- Query: "How can I protect my computer from hackers?"
+  - Top result: Cybersecurity protects systems and data from digital attacks.
+  - Similarity score: `0.4660`
 
-Query:
-
-```text
-How do computers learn from data?
-```
-
-Top result:
-
-```text
-Machine learning allows computers to learn patterns from data.
-```
-
-Observed cosine similarity: `0.6891`.
-
-Another test query, "How can I protect my computer from hackers?", returned the cybersecurity document as its top result, with a cosine similarity score of `0.4660`.
-
-These scores represent similarity between embedding vectors, not probabilities or accuracy percentages.
-
-### Evaluation
-
-The evaluation uses five manually selected queries covering:
-- Machine learning
-- Databases
-- Version control
-- Web development
-- Cybersecurity
-
-The initial results show that the system can retrieve relevant documents based on semantic similarity. The collection is small, so broader testing would be needed to assess retrieval quality more thoroughly.
+All five test queries executed successfully. The ranking test also produced the expected descending order of similarity scores.
 
 ### Files
 - `semantic_search.py`
+- `test_ranking.py`
 - `evaluation_report.md`
 
-### Technologies
-- Python
-- Sentence Transformers
-- PyTorch
-- NumPy
+### Limitations
+- The search collection contains only 20 sample documents.
+- Similarity scores are not probabilities or accuracy percentages.
+- Retrieval quality should be evaluated on a larger collection of documents and queries.
 
 ## Project Structure
 
