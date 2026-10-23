@@ -1,6 +1,4 @@
-
 from sentence_transformers import SentenceTransformer, util
-import numpy as np
 
 # 1. Create a collection of documents
 documents = [
@@ -36,35 +34,35 @@ model = SentenceTransformer(
 
 print("Embedding model loaded successfully!")
 
-# 3. Generate embeddings for all documents
+# 3. Generate embeddings for all documents once
 document_embeddings = model.encode(
     documents,
     convert_to_tensor=True
 )
 
-print("Embedding generation complete!")
+print("\nEmbedding generation complete!")
 print("Embedding shape:", document_embeddings.shape)
 
 
-#Add the semantic search function
-
-
+# 4. Implement semantic search
 def semantic_search(query, top_k=3):
-    # Convert the search query into an embedding
+
+    # Convert the user's query into an embedding
     query_embedding = model.encode(
         query,
         convert_to_tensor=True
     )
 
-    # Calculate similarity with all 20 documents
+    # Compare the query with all document embeddings
     similarities = util.cos_sim(
         query_embedding,
         document_embeddings
     )[0]
 
-    # Get the indices of the highest-scoring documents
+    # Get indices of the highest similarity scores
     top_indices = similarities.argsort(descending=True)[:top_k]
 
+    # Display the top matching documents
     print(f"\nSearch query: {query}")
     print(f"\nTop {top_k} results:\n")
 
@@ -76,7 +74,7 @@ def semantic_search(query, top_k=3):
         print(f"   Similarity score: {score:.4f}\n")
 
 
-
+# 5. Test semantic search with multiple queries
 if __name__ == "__main__":
     test_queries = [
         "How do computers learn from data?",
@@ -89,4 +87,3 @@ if __name__ == "__main__":
     for query in test_queries:
         semantic_search(query, top_k=3)
         print("-" * 60)
-
