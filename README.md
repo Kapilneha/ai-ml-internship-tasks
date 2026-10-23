@@ -1,6 +1,6 @@
 # AI/ML Engineering Internship Tasks
 
-This repository contains my work for the AI/ML Engineering internship training roadmap, covering environment setup, LLM API integration, JSON response parsing, text embeddings, and vector similarity.
+This repository contains my work for the AI/ML Engineering internship training roadmap, covering environment setup, LLM API integration, JSON response parsing, text embeddings, vector similarity, and semantic search.
 
 ## Task 1: Environment Setup and API Connectivity
 
@@ -121,17 +121,47 @@ A higher cosine similarity indicates that two embedding vectors point in more si
 ### File
 - `embeddings_similarity.ipynb`
 
-### Technologies
-- Python
-- Sentence Transformers
-- PyTorch
-- NumPy
-- pandas
+## Task 4: Semantic Search
+
+### Objectives
+- Retrieve relevant documents using semantic similarity rather than exact keyword matching.
+- Generate document and query embeddings.
+- Rank documents using cosine similarity.
+
+### Work Completed
+- Created a collection of 20 sample documents covering programming, AI, databases, networking, cybersecurity, and related topics.
+- Used `sentence-transformers/all-MiniLM-L6-v2` to generate 384-dimensional embeddings.
+- Precomputed document embeddings before processing queries.
+- Generated a new embedding for each search query.
+- Calculated cosine similarity between the query and document embeddings.
+- Returned the top 3 documents ranked by similarity.
+- Tested the implementation with five queries.
+- Added a ranking test and documented evaluation results and limitations.
+
+### Example Results
+- Query: "How do computers learn from data?"
+  - Top result: Machine learning allows computers to learn patterns from data.
+  - Similarity score: `0.6891`
+- Query: "How can I protect my computer from hackers?"
+  - Top result: Cybersecurity protects systems and data from digital attacks.
+  - Similarity score: `0.4660`
+
+All five test queries executed successfully. The ranking test also produced the expected descending order of similarity scores.
+
+### Files
+- `semantic_search.py`
+- `test_ranking.py`
+- `evaluation_report.md`
+
+### Limitations
+- The search collection contains only 20 sample documents.
+- Similarity scores are not probabilities or accuracy percentages.
+- Retrieval quality should be evaluated on a larger collection of documents and queries.
 
 ## Project Structure
 
 ```text
-ai_ml_setup/
+ai-ml-internship-tasks/
 ├── src/
 │   ├── __init__.py
 │   ├── main.py
@@ -143,12 +173,13 @@ ai_ml_setup/
 ├── claude_json.py
 ├── embeddings_similarity.ipynb
 ├── semantic_search.py
+├── evaluation_report.md
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
 
-The `.env` file is used for local API credentials and must not be committed to GitHub. The `semantic_search.py` file is reserved for subsequent work and is not claimed as completed in these tasks.
+The `.env` file is used for local API credentials and must not be committed to GitHub. The `.venv` directory and model cache are local environment artifacts and should remain excluded from version control.
 
 ## Technologies Used
 
@@ -169,7 +200,7 @@ The `.env` file is used for local API credentials and must not be committed to G
 - [x] Task 1: Environment setup and API connectivity
 - [x] Task 2: LLM integration and JSON response parsing
 - [x] Task 3: Text embeddings and vector similarity
-- [ ] Task 4: Semantic search over sample documents
+- [x] Task 4: Semantic search over sample documents
 - [ ] Task 5: Peer review and accuracy/cost notes
 
 ## Security
